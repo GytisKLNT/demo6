@@ -34,6 +34,21 @@ const displayProducts = (item) => {
   info.appendChild(kaina);
   info.appendChild(button);
   container.appendChild(productBlock);
+
+  button.addEventListener("click", async () => {
+    const res = await fetch("https://demo-17-vnoq3.ondigitalocean.app/cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        randomId: 010203040506,
+        productId: item.id,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+  });
 };
 
 const getData = async (url) => {
