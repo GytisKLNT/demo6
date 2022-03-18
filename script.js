@@ -1,3 +1,5 @@
+// Creates and ads fruit cards to main container
+
 const displayProducts = (item) => {
   const container = document.querySelector(".container");
   const productBlock = document.createElement("div");
@@ -35,6 +37,8 @@ const displayProducts = (item) => {
   info.appendChild(button);
   container.appendChild(productBlock);
 
+  //   On add to cart button click sends cart id and product id to backend
+
   button.addEventListener("click", async () => {
     const res = await fetch("https://demo-17-vnoq3.ondigitalocean.app/cart", {
       method: "POST",
@@ -51,6 +55,8 @@ const displayProducts = (item) => {
   });
 };
 
+// GET data from backend
+
 const getData = async (url) => {
   try {
     const res = await fetch(url);
@@ -61,6 +67,8 @@ const getData = async (url) => {
   }
 };
 
+// From where I get products and ratings
+
 const dispayItems = async () => {
   const products = await getData(
     "https://demo-17-vnoq3.ondigitalocean.app/products"
@@ -68,6 +76,8 @@ const dispayItems = async () => {
   const ratings = await getData(
     "https://demo-17-vnoq3.ondigitalocean.app/ratings"
   );
+
+  //
 
   const items = products.map((products) => {
     const custRatings = ratings.filter(
