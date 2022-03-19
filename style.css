@@ -4,7 +4,8 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.headerContainer {
+.headerContainer,
+.cartHeader {
   border-bottom: 1px solid #f2f2f2;
   line-height: 0.9rem;
   margin: 0 auto;
@@ -80,4 +81,32 @@ h4 {
 
 .info button:hover {
   background-color: #92ca88;
+}
+
+/* Cart page css */
+
+.cartHeader {
+  text-align: left;
+}
+
+.cartContainer {
+  padding: 2rem 0;
+  width: 80%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+table {
+  width: 100%;
+  text-align: center;
+}
+
+table td,
+th {
+  border-bottom: 1px solid #f2f2f2;
+  padding: 2rem 0;
+}
+
+table tbody tr td img {
+  width: 100px;
 }
