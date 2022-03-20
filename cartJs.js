@@ -1,3 +1,4 @@
+// Try to get data from server alert error if failed
 const getData = async (url) => {
   try {
     const res = await fetch(url);
@@ -10,6 +11,7 @@ const getData = async (url) => {
 
 const tbody = document.querySelector("tbody");
 
+// Function to display items in table from fetched Object
 function displayItemsinCart(item) {
   const tr = tbody.insertRow();
 
@@ -38,6 +40,8 @@ function displayItemsinCart(item) {
   td6.innerText = `$${(item.price * item.amount).toFixed(2)}`;
 }
 
+// Fetch all data from server and item ids in cart
+
 const itemsInCart = async () => {
   const products = await getData(
     "https://demo-17-vnoq3.ondigitalocean.app/products"
@@ -46,13 +50,13 @@ const itemsInCart = async () => {
     "https://demo-17-vnoq3.ondigitalocean.app/cart/1108099398"
   );
 
-  console.log(products);
-  console.log(cart);
-
+  // new array to store objects that are added to cart and for each object add new amount key.
   const cartFruits = [];
   products.forEach((e) => {
     e.amount = 1;
   });
+
+  //   Compare cart and all products arrays and if they match add them to the new cartFruit array if there is already the same object in array juct increase the amount
 
   cart.forEach((value) => {
     products.forEach((element) => {
@@ -65,7 +69,7 @@ const itemsInCart = async () => {
     });
   });
 
-  console.log(cartFruits);
+  //   for each array elemnt display product in table
   cartFruits.forEach((element) => {
     displayItemsinCart(element);
   });
