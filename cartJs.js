@@ -9,7 +9,6 @@ const getData = async (url) => {
 };
 
 const tbody = document.querySelector("tbody");
-const quantity = 1;
 
 function displayItemsinCart(item) {
   const tr = tbody.insertRow();
@@ -33,10 +32,10 @@ function displayItemsinCart(item) {
 
   const td5 = tr.insertCell();
 
-  td5.innerText = quantity;
+  td5.innerText = `${item.amount}`;
 
   const td6 = tr.insertCell();
-  td6.innerText = `$${item.price.toFixed(2) * quantity}`;
+  td6.innerText = `$${(item.price * item.amount).toFixed(2)}`;
 }
 
 const itemsInCart = async () => {
@@ -51,17 +50,25 @@ const itemsInCart = async () => {
   console.log(cart);
 
   const cartFruits = [];
+  products.forEach((e) => {
+    e.amount = 1;
+  });
 
   cart.forEach((value) => {
     products.forEach((element) => {
+      if (value === element.id && cartFruits.includes(element)) {
+        return element.amount++;
+      }
       if (value === element.id) {
-        displayItemsinCart(element);
         cartFruits.push(element);
       }
     });
   });
 
   console.log(cartFruits);
+  cartFruits.forEach((element) => {
+    displayItemsinCart(element);
+  });
 };
 
 itemsInCart();
