@@ -39,6 +39,8 @@ const displayProducts = (item) => {
 
   //   On add to cart button click sends cart id and product id to backend
 
+  const addedInCart = document.querySelector(".addedInCart");
+
   button.addEventListener("click", async () => {
     const res = await fetch("https://demo-17-vnoq3.ondigitalocean.app/cart", {
       method: "POST",
@@ -52,6 +54,7 @@ const displayProducts = (item) => {
     });
     const data = await res.json();
     console.log(data);
+    addedInCart.style.display = "block";
   });
 };
 
