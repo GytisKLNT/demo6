@@ -47,7 +47,7 @@ const itemsInCart = async () => {
     "https://demo-17-vnoq3.ondigitalocean.app/products"
   );
   const cart = await getData(
-    "https://demo-17-vnoq3.ondigitalocean.app/cart/1108099398"
+    "https://demo-17-vnoq3.ondigitalocean.app/cart/2323256"
   );
 
   // new array to store objects that are added to cart and for each object add new amount key.

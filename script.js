@@ -48,7 +48,7 @@ const displayProducts = (item) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        randomId: 010203040506,
+        randomId: 2323256,
         productId: item.id,
       }),
     });
