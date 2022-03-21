@@ -1,3 +1,10 @@
+let cartId = Number(localStorage.getItem("cartId"));
+
+if (!cartId) {
+  cartId = Math.floor(Math.random() * 1000000) * 1;
+  localStorage.setItem("cartId", cartId);
+}
+
 // GET data from backend
 
 const getData = async (url) => {
@@ -60,7 +67,7 @@ const displayProducts = (item) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        randomId: 2323256,
+        randomId: cartId,
         productId: item.id,
       }),
     });
