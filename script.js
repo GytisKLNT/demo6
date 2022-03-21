@@ -1,3 +1,15 @@
+// GET data from backend
+
+const getData = async (url) => {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return alert(error.message || "An error has happened");
+  }
+};
+
 // Creates and ads fruit cards to main container
 
 const displayProducts = (item) => {
@@ -56,18 +68,6 @@ const displayProducts = (item) => {
     console.log(data);
     addedInCart.style.display = "block";
   });
-};
-
-// GET data from backend
-
-const getData = async (url) => {
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    return alert(error.message || "An error has happened");
-  }
 };
 
 // From where I get products and ratings

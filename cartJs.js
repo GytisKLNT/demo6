@@ -1,12 +1,7 @@
 // Try to get data from server alert error if failed
 const getData = async (url) => {
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    return alert(error.message || "An error has hapened");
-  }
+  const res = await fetch(url);
+  return res.json();
 };
 
 const tbody = document.querySelector("tbody");
@@ -43,36 +38,41 @@ function displayItemsinCart(item) {
 // Fetch all data from server and item ids in cart
 
 const itemsInCart = async () => {
-  const products = await getData(
-    "https://demo-17-vnoq3.ondigitalocean.app/products"
-  );
-  const cart = await getData(
-    "https://demo-17-vnoq3.ondigitalocean.app/cart/2323256"
-  );
+  try {
+    const data = await Promise.all([
+      getData("https://demo-17-vnoq3.ondigitalocean.app/products"),
+      getData("https://demo-17-vnoq3.ondigitalocean.app/cart/2323256"),
+    ]);
 
-  // new array to store objects that are added to cart and for each object add new amount key.
-  const cartFruits = [];
-  products.forEach((e) => {
-    e.amount = 1;
-  });
+    console.log(data);
 
-  //   Compare cart and all products arrays and if they match add them to the new cartFruit array if there is already the same object in array juct increase the amount
-
-  cart.forEach((value) => {
-    products.forEach((element) => {
-      if (value === element.id && cartFruits.includes(element)) {
-        return element.amount++;
-      }
-      if (value === element.id) {
-        cartFruits.push(element);
-      }
+    // new array to store objects that are added to cart and for each object add new amount key.
+    data[0].forEach((e) => {
+      e.amount = 1;
     });
-  });
 
-  //   for each array elemnt display product in table
-  cartFruits.forEach((element) => {
-    displayItemsinCart(element);
-  });
+    const cartFruits = [];
+
+    //   Compare cart and all products id's arrays and if they match add them to the new cartFruit array if there is already the same object in array juct increase the amount
+
+    data[1].forEach((value) => {
+      data[0].forEach((element) => {
+        if (value === element.id && cartFruits.includes(element)) {
+          return element.amount++;
+        }
+        if (value === element.id) {
+          cartFruits.push(element);
+        }
+      });
+    });
+
+    //   for each array elemnt display product in table
+    cartFruits.forEach((element) => {
+      displayItemsinCart(element);
+    });
+  } catch (error) {
+    alert(error.message);
+  }
 };
 
 itemsInCart();
